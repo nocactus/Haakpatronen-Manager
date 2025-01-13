@@ -2,8 +2,10 @@
 /*
 Plugin Name: Haakpatroon Manager
 Description: Plugin om haakpatronen te beheren en tonen in een responsive grid met filteropties.
-Version: 3.91
+Version: 3.92
 Author: Timooow & Copilot
+GitHub Plugin URI: https://github.com/nocactus/Haakpatronen-Manager
+GitHub Branch: main
 */
 
 // Include the different parts of the plugin.
