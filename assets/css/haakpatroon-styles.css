@@ -1,0 +1,167 @@
+/* haakpatroon-styles.css */
+
+.haakpatroon-grid {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent items from stacking */
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 10px;
+    padding: 10px;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE 10+ */
+    position: relative; /* Ensure chevron can position correctly */
+}
+
+.haakpatroon-grid::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.haakpatroon-grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .haakpatroon-grid-layout {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.haakpatroon-item {
+    position: relative; /* Ensure positioning context for child elements */
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 280px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-right: 10px;
+}
+
+.haakpatroon-grid-layout .haakpatroon-item {
+    max-width: 280px;
+    width: 100%;
+}
+
+.haakpatroon-thumbnail {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Force square aspect ratio */
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f4;
+    position: relative;
+}
+
+.haakpatroon-thumbnail img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Crop the image to fit within the square */
+}
+
+.haakpatroon-title-container {
+    padding: 10px;
+    text-align: center;
+}
+
+.haakpatroon-title {
+    font-size: 1.2em;
+    margin: 0;
+    color: #333;
+}
+
+.haakpatroon-link {
+    display: block;
+    margin-top: 5px;
+    font-size: 1em;
+    color: #0073aa;
+    text-decoration: none;
+}
+
+.haakpatroon-link:hover {
+    color: #005177;
+}
+
+.haakpatroon-gratis-pill {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #fafafa;
+    color: #123F47;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1; /* Ensure pill is above other elements */
+}
+
+.haakpatroon-haakclub-pill {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #FFB7CE;
+    color: #802343;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1; /* Ensure pill is above other elements */
+}
+
+.chevron-right {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8em;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.chevron-right.hidden {
+    display: none;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .haakpatroon-item {
+        max-width: 160px;
+    }
+
+    .haakpatroon-title {
+        font-size: 1em;
+    }
+
+    .haakpatroon-link {
+        font-size: 0.9em;
+    }
+
+    .haakpatroon-gratis-pill, .haakpatroon-haakclub-pill {
+        font-size: 0.7em;
+        padding: 4px 8px;
+    }
+
+    .chevron-right {
+        width: 30px;
+        height: 30px;
+        font-size: 1.2em;
+    }
+}
