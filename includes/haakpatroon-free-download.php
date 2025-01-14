@@ -1,4 +1,3 @@
-
 <?php
 // Add a metabox for file upload in the Haakpatroon post type
 add_action('add_meta_boxes', function() {
@@ -70,26 +69,31 @@ add_shortcode('haakpatroon_download', function($atts) {
             </div>
         <?php endif; ?>
         <p><?php echo esc_html($post->post_excerpt); ?></p>
-        <form method="post" id="haakpatroon-download-form">
-            <label for="voornaam"><?php _e('Voornaam', 'haakpatroon-manager'); ?></label>
-            <input type="text" name="voornaam" id="voornaam" required>
-            <label for="email"><?php _e('E-mailadres', 'haakpatroon-manager'); ?></label>
-            <input type="email" name="email" id="email" required>
-            <button type="submit"><?php _e('Download', 'haakpatroon-manager'); ?></button>
-        </form>
+        <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['voornaam']) && isset($_POST['email'])): ?>
+            <?php
+            $voornaam = sanitize_text_field($_POST['voornaam']);
+            $email = sanitize_email($_POST['email']);
+
+            if ($voornaam && $email) {
+                // Placeholder for ActiveCampaign API integration
+                // Normally, you'd add the API request here
+                echo '<p>' . __('Bedankt! Je ontvangt een e-mail met de downloadlink.', 'haakpatroon-manager') . '</p>';
+                echo '<a href="' . esc_url($file) . '" class="haakpatroon-download-link">' . __('Download Gratis', 'haakpatroon-manager') . '</a>';
+            } else {
+                echo '<p>' . __('Er ging iets mis bij het verwerken van je gegevens. Probeer het opnieuw.', 'haakpatroon-manager') . '</p>';
+            }
+            ?>
+        <?php else: ?>
+            <form method="post" id="haakpatroon-download-form">
+                <label for="voornaam"><?php _e('Voornaam', 'haakpatroon-manager'); ?></label>
+                <input type="text" name="voornaam" id="voornaam" required>
+                <label for="email"><?php _e('E-mailadres', 'haakpatroon-manager'); ?></label>
+                <input type="email" name="email" id="email" required>
+                <button type="submit"><?php _e('Download', 'haakpatroon-manager'); ?></button>
+            </form>
+        <?php endif; ?>
     </div>
     <?php
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $voornaam = sanitize_text_field($_POST['voornaam']);
-        $email = sanitize_email($_POST['email']);
-
-        // Placeholder for ActiveCampaign API integration
-        if ($voornaam && $email) {
-            // Normally, you'd add the API request here
-            echo '<p>' . __('Bedankt! Je ontvangt een e-mail met de downloadlink.', 'haakpatroon-manager') . '</p>';
-        }
-    }
 
     return ob_get_clean();
 });
